@@ -43,16 +43,19 @@ public class Song {
 	@Column(name = "streams")
 	private Long streams = 0L;
 	
+	@Column(name = "price", nullable = true)
+	private float price = 0;
+	
 	@ManyToMany
     @JoinTable(name="song_performer",
             joinColumns = @JoinColumn(name="songid"),
             inverseJoinColumns = @JoinColumn(name="artistid")
     )
-    private Set<Account> performer = new HashSet<>();
+    private List<Account> performer = new ArrayList<>();
 	
 	public  Song(){}
 
-    public Song(String songName, Long albumId, String genre, String lyrics, String audio, String image, float duration, Long likes, Long streams) {
+    public Song(String songName, Long albumId, String genre, String lyrics, String audio, String image, float duration, Long likes, Long streams, float price) {
         this.songname = songName;
         this.albumid = albumId;
         this.genre = genre;
@@ -62,6 +65,7 @@ public class Song {
         this.duration = duration;
         this.likes = likes;
         this.streams = streams;
+        this.price = price;
     }
 
 	public Long getId() {
@@ -152,15 +156,23 @@ public class Song {
 		this.streams = streams;
 	}
 
-	public Set<Account> getPerformer() {
+	public List<Account> getPerformer() {
 		return performer;
 	}
 
-	public void setPerformer(Set<Account> performer) {
+	public void setPerformer(List<Account> performer) {
 		this.performer = performer;
 	}
 	
 	public void addPerformer(Account a) {
 		this.performer.add(a);
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 }

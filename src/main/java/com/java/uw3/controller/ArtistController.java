@@ -11,6 +11,7 @@ import com.java.uw3.model.Song;
 import com.java.uw3.service.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class ArtistController {
 	@Autowired

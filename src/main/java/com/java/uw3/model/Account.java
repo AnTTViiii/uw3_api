@@ -31,11 +31,7 @@ public class Account {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-    private Set<Album> albums = new HashSet<>();
-	
-//	@JsonIgnore
-//	@ManyToMany(mappedBy = "favArtists")
-//    private Set<Account> follower = new HashSet<>();
+    private List<Album> albums = new ArrayList<>();
 	
 	@JsonIgnore
     @ManyToMany
@@ -43,7 +39,7 @@ public class Account {
             joinColumns = @JoinColumn(name="followerid"),
             inverseJoinColumns = @JoinColumn(name="artistid")
     )
-    private Set<Account> favArtists = new HashSet<>();
+    private List<Account> favArtists = new ArrayList<>();
 	
 	@JsonIgnore
     @ManyToMany
@@ -52,7 +48,7 @@ public class Account {
             joinColumns = @JoinColumn(name="userid"),
             inverseJoinColumns = @JoinColumn(name="songid")
     )
-    private Set<Song> likedSong = new HashSet<>();
+    private List<Song> likedSong = new ArrayList<>();
 
     @JsonIgnore
     @ManyToMany
@@ -61,7 +57,7 @@ public class Account {
             joinColumns = @JoinColumn(name="userid"),
             inverseJoinColumns = @JoinColumn(name="albumid")
     )
-    private Set<Album> likedAlbum = new HashSet<>();
+    private List<Album> likedAlbum = new ArrayList<>();
 	
 	public Account() {}
 	
@@ -111,19 +107,19 @@ public class Account {
 		this.loginAcc = loginAcc;
 	}
 
-	public Set<Song> getLikedSong() {
+	public List<Song> getLikedSong() {
 		return likedSong;
 	}
 
-	public void setLikedSong(Set<Song> likedSong) {
+	public void setLikedSong(List<Song> likedSong) {
 		this.likedSong = likedSong;
 	}
 
-	public Set<Album> getLikedAlbum() {
+	public List<Album> getLikedAlbum() {
 		return likedAlbum;
 	}
 
-	public void setLikedAlbum(Set<Album> likedAlbum) {
+	public void setLikedAlbum(List<Album> likedAlbum) {
 		this.likedAlbum = likedAlbum;
 	}
 	

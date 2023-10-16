@@ -41,7 +41,7 @@ public class AccountService {
 		acc.avatar = user.getAvatar();
 		acc.ethwallet = user.getEthwallet();
 		acc.followercount = user.getFollowercount();
-        Set<Following> userFavArtists = followRepo.findByFollowerid(accId);
+        List<Following> userFavArtists = followRepo.findByFollowerid(accId);
         for (Following artist: userFavArtists) {
             acc.favArtists.add(accRepo.findById(artist.getArtistid()).get());
         }
@@ -156,7 +156,13 @@ public class AccountService {
         }
         return accRepo.save(artist);
     }
-	//follow artist
+	//---------------------------
+	public Boolean isLikedSong(Long accId, Long songId){
+        return userLikeSongRepo.findBySongidAndUserid(songId, accId) != null;
+    }
+	public Boolean isLikedAlbum(Long accId, Long albumId){
+        return userLikeAlbumRepo.findByAlbumidAndUserid(albumId, accId) != null;
+    }
 	public Boolean isFollow(Long accId, Long artistId){
         return followRepo.findByFolloweridAndArtistid(accId, artistId) != null;
     }

@@ -9,10 +9,10 @@ public class AccountDto {
 	public String avatar;
 	public String ethwallet;
 	public int followercount;
-	public Set<Account> favArtists = new HashSet<>();
+	public List<Account> favArtists = new ArrayList<>();
 	
 	public AccountDto() {}
-	public AccountDto(String username, String avatar, String ethwallet, int follower, Set<Account> favArtists) {
+	public AccountDto(String username, String avatar, String ethwallet, int follower, List<Account> favArtists) {
 		this.username = username;
 		this.avatar = avatar;
 		this.ethwallet = ethwallet;

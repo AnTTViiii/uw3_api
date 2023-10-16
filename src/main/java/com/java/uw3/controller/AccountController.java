@@ -3,6 +3,7 @@ package com.java.uw3.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.java.uw3.model.*;
 import com.java.uw3.service.AccountService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class AccountController {
 	@Autowired
@@ -79,6 +81,16 @@ public class AccountController {
         return accService.unfollows(accId, artistId);
     }
 
+	@RequestMapping(value="/user/{accId}/islikedsong/{songId}", method=RequestMethod.GET)
+	public Boolean isLikedSong(@PathVariable(value="accId") Long accId, @PathVariable(value="songId") Long songId){
+        return accService.isLikedSong(accId, songId);
+    }
+	
+	@RequestMapping(value="/user/{accId}/islikedalbum/{albumId}", method=RequestMethod.GET)
+	public Boolean isLikedAlbum(@PathVariable(value="accId") Long accId, @PathVariable(value="albumId") Long albumId){
+        return accService.isLikedAlbum(accId, albumId);
+    }
+	
 	@RequestMapping(value="/user/{accId}/isfollow/{artistId}", method=RequestMethod.GET)
 	public Boolean isFollow(@PathVariable(value="accId") Long accId, @PathVariable(value="artistId") Long artistId){
         return accService.isFollow(accId, artistId);

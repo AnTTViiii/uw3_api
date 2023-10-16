@@ -10,18 +10,19 @@ import com.java.uw3.service.*;
 import com.java.uw3.dto.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class AlbumController {
 	@Autowired
     private AlbumService albumService;
-    
+	
 	@RequestMapping(value="/latestAlbum", method=RequestMethod.GET)
-    public Set<AlbumDto> getLatestAlbum() {
+    public List<AlbumDto> getLatestAlbum() {
     	return albumService.getAlbums();
     }
     
 	@RequestMapping(value="/album/{albumId}", method=RequestMethod.GET)
-    public Optional<Album> getAlbumById(@PathVariable(value="albumId") Long albumId) {
+    public AlbumDto getAlbumById(@PathVariable(value="albumId") Long albumId) {
 		return albumService.getAlbumById(albumId);
 	}
     
@@ -38,5 +39,10 @@ public class AlbumController {
 	@RequestMapping(value="album/{albumId}", method=RequestMethod.DELETE)
     public void deleteAlbum(@PathVariable(value="albumId") Long albumId) {
     	albumService.deleteAlbum(albumId);;
+	}
+	
+	@RequestMapping(value="album/{albumId}/streams", method=RequestMethod.GET)
+    public Long getAlbumStreams(@PathVariable(value="albumId") Long albumId) {
+    	return albumService.getAlbumStreams(albumId);
 	}
 }

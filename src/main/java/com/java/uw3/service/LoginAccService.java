@@ -12,6 +12,8 @@ import com.java.uw3.repository.*;
 public class LoginAccService {
 	@Autowired
 		LoginAccRepository loginRepo;
+	@Autowired
+		AccountRepository accRepo;
 	// CREATE
 	public LoginAccount createLoginAcc(LoginAccount loginAcc) {
 		loginAcc.getAcc().setLoginAcc(loginAcc);
@@ -38,11 +40,11 @@ public class LoginAccService {
 	}
 	
 	//LOGIN
-	public LoginAccount login(LoginForm login) {
+	public Account login(LoginForm login) {
         LoginAccount account = loginRepo.findUserByEmail(login.getEmai());
         if(account!= null){
             if(account.getPassword().equals(login.getPassword()))
-                return account;
+                return accRepo.findById(account.getId()).get();
         }
         return null;
 	}

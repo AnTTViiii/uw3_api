@@ -33,7 +33,7 @@ public class Album {
 	
 	@JsonIgnore
     @OneToMany(mappedBy = "album")
-    private Set<Song> songs = new HashSet<>();
+    private List<Song> songs = new ArrayList<>();
 	
 	public  Album(){}
 
@@ -93,11 +93,11 @@ public class Album {
 		this.opid = opId;
 	}
 
-	public Set<Song> getSongs() {
+	public List<Song> getSongs() {
 		return songs;
 	}
 
-	public void setSongs(Set<Song> songs) {
+	public void setSongs(List<Song> songs) {
 		this.songs = songs;
 	}
 

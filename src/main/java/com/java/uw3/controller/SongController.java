@@ -39,6 +39,11 @@ public class SongController {
 	public Song getSongById(@PathVariable(value="songId") Long songId){
         return songService.getSongById(songId);
     }
+	
+	@RequestMapping(value="/song/album={albumId}", method=RequestMethod.GET)
+	public List<Song> getSongByAlbumId(@PathVariable(value="albumId") Long albumid){
+    	return songService.getSongByAlbumId(albumid);
+    }
     
     @RequestMapping(value="/song/{songId}", method=RequestMethod.PUT)
 	public Song updateSong(@PathVariable(value="songId") Long songId, @RequestBody Song song) {

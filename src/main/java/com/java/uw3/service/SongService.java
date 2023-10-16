@@ -31,11 +31,15 @@ public class SongService {
     }
     
     public List<Song> getLatestSongs(){
-        return songRepo.findAll(Sort.by("releaseDate").descending());
+        return songRepo.findAll(Sort.by("id").descending());
     }
     
     public Song getSongById(Long songid){
         return songRepo.findById(songid).get();
+    }
+    
+    public List<Song> getSongByAlbumId(Long albumid) {
+    	return songRepo.findByAlbumid(albumid);
     }
     
     public Song updateSong(Long songId, Song song) {
@@ -47,6 +51,9 @@ public class SongService {
         songTemp.setAudio(song.getAudio());
         songTemp.setGenre(song.getGenre());
         songTemp.setAlbumid(song.getAlbumid());
+        for (Account a:song.getPerformer()) {
+        	songTemp.addPerformer(a);
+    	}
         songTemp.setPerformer(song.getPerformer());
         return songRepo.save(songTemp);
     }

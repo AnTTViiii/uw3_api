@@ -3,6 +3,7 @@ package com.java.uw3.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.java.uw3.model.*;
 import com.java.uw3.service.LoginAccService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class LoginAccController {
 	@Autowired
@@ -39,7 +41,7 @@ public class LoginAccController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-    public LoginAccount login(@RequestBody LoginForm login ) {
+    public Account login(@RequestBody LoginForm login ) {
         return loginService.login(login);
     }
 }
